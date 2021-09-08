@@ -11,19 +11,12 @@ router.get('/', async (req,res,next)=>{
     .catch(next)
 });
 
-router.get('/:id', async (req,res,next)=>{
+router.get('/:id', checkCarId, async (req,res,next)=>{
+    res.json(req.car);
 });
 
 router.post('/', checkCarPayload, checkVinNumberUnique,  async (req,res,next)=>{
-    const newCar = {
-        vin: req.body.vin,
-        make: req.body.make,
-        model: req.body.model,
-        mileage: req.body.mileage,
-        title: req.body.title,
-        transmission: req.body.transmission
-    }
-    Cars.create(newCar)
+    Cars.create(req.body)
     .then(obj=>{
         res.status(201).json(obj)
     })

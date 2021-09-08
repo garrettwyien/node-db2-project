@@ -1,15 +1,15 @@
-exports.up = async function (knex) {
+exports.up = async function (knex, Promise) {
   await knex.schema.createTable('cars', table => {
-    table.increments()
-    table.text('vin').unique().notNullable()
-    table.text('make').notNullable()
-    table.text('model').notNullable()
-    table.integer('mileage').notNullable()
-    table.text('title')
-    table.text('transmission')
+    table.increments();
+    table.text('vin').unique().notNullable();
+    table.text('make').notNullable();
+    table.text('model').notNullable();
+    table.integer('mileage').notNullable();
+    table.text('title');
+    table.text('transmission');
   })
 };
 
-exports.down = async function (knex) {
+exports.down = async function (knex, Promise) {
   await knex.schema.dropTableIfExists('cars')
 };
